@@ -1,0 +1,22 @@
+<p><%= current_user.name %></p>
+<a href='/users/<%= current_user.id %>/edit'>Edit Profile</a>
+<form action='/secret' method='post'>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="Content">New Secret</label>
+    <textarea name="Content" id="Content"></textarea>
+    <input type="submit" value="Create Secret">
+</form>
+<p>Secrets</p>
+<% current_user.secrets.each do |secret| %>
+    <% if secret.id == current_user.secrets.last.id %>
+        <p>My new secret</p>
+        <%= secret.content %>
+    <% end %>
+    <% unless secret.id == current_user.secrets.last.id %>
+        <%= secret.content %>
+    <% end %>
+    <form action='/secret/destroy/<%= secret.id %>' method='post'>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value="Delete Secret">
+    </form>
+<% end %>

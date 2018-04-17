@@ -1,0 +1,15 @@
+<h1>Users#edit</h1>
+<p>Find me in app/views/users/edit.html.erb</p>
+<%= current_user.name %>
+<form action="/update" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" value="<%= current_user.name %>">
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" value="<%= current_user.email %>">
+    <input type="submit" value="Update">
+</form>
+<form action="/destroy/<%= current_user.id %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="submit" value="Delete Account">
+</form>
