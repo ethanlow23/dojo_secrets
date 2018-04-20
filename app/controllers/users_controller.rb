@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     session[:user_id] = nil
   end
   def create
-    @user = User.new(params.require(:user).permit(:name, :email, :password))
+    @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
     if @user.save
       session[:user_id] = @user.id
       redirect_to sessions_new_path
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def edit
   end
   def update
-    @user = User.update(current_user.id, name: params[:name], email: params[:email])
+    @user = User.update(current_user.id, params.require(:user).permit(:name, :email, :password, :password_confirmation))
     if @user.save
       redirect_to "/users/#{current_user.id}/edit"
     else

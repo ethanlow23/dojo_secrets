@@ -1,4 +1,4 @@
-<p><%= current_user.name %></p>
+<p><%= current_user.name %>   <a href="/secrets">View All Secrets</a></p>
 <a href='/users/<%= current_user.id %>/edit'>Edit Profile</a>
 <form action='/secret' method='post'>
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

@@ -16,7 +16,7 @@ class SecretsController < ApplicationController
       User.find(current_user.id).likes.create(secret:Secret.find(params[:secret_id]))
     end
     if params[:secret] == "unlike"
-      User.find(current_user.id).likes.find(params[:secret_id]).destroy
+      User.find(current_user.id).likes.find(secret: Secret.find(params[:secret_id])).destroy
     end
     redirect_to secrets_path
   end
